@@ -13,6 +13,17 @@ class BotContext(ABC):
     async def reply(self, text: str, **kwargs) -> None:
         ...
 
+    @abstractmethod
+    async def reply_file(
+        self,
+        data: bytes,
+        *,
+        filename: str,
+        content: str | None = None,
+        **kwargs,
+    ) -> None:
+        ...
+
     @property
     @abstractmethod
     def locale(self) -> str:
