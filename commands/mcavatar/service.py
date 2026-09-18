@@ -45,14 +45,14 @@ class McAvatarResult:
 
 
 class McAvatarService:
-    def __init__(self, CORE_SCRIPTS_DIR: Path):
-        self.CORE_SCRIPTS_DIR = CORE_SCRIPTS_DIR
+    def __init__(self, commands_SCRIPTS_DIR: Path):
+        self.commands_SCRIPTS_DIR = commands_SCRIPTS_DIR
 
     def check_environment(self) -> tuple[bool, str]:
         if not shutil.which("node"):
             return False, "Node.js executable not found in system PATH"
-        if not self.CORE_SCRIPTS_DIR.exists():
-            return False, f"Script file not found at '{self.CORE_SCRIPTS_DIR}'"
+        if not self.commands_SCRIPTS_DIR.exists():
+            return False, f"Script file not found at '{self.commands_SCRIPTS_DIR}'"
         return True, ""
 
     async def fetch_skin(self, username: str) -> bytes:
@@ -97,7 +97,7 @@ class McAvatarService:
     async def process(self, image_data: bytes, options: McAvatarOptions) -> bytes:
         proc = await asyncio.create_subprocess_exec(
             "node",
-            str(self.CORE_SCRIPTS_DIR),
+            str(self.commands_SCRIPTS_DIR),
             json.dumps(options.to_nodejs_options()),
             stdin=subprocess.PIPE,
             stdout=subprocess.PIPE,
