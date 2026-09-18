@@ -1,1 +1,1 @@
-# molanko-core-bot
+# molanko-bot-commands
