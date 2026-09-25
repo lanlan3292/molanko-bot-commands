@@ -1,4 +1,12 @@
 {
   "jrrp.command_description": "查询今日人品",
-  "jrrp.response": "**今日人品**\n用户：{name}\n日期：{date}\n人品：**{score}**（{level}）\n识别码：`{identifier}`"
+  "jrrp.param.user": "要查询的用户（默认为自己）",
+  "jrrp.response": "**今日人品**\n用户：{name}\n日期：{date}\n人品：**{score}**（{level}）\n识别码：`{identifier}`",
+  "jrrp.level.terrible": "极差",
+  "jrrp.level.poor": "较差",
+  "jrrp.level.average": "一般",
+  "jrrp.level.fair": "尚可",
+  "jrrp.level.good": "不错",
+  "jrrp.level.excellent": "极佳",
+  "jrrp.level.max": "今日人品爆棚"
 }

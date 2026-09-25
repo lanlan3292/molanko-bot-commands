@@ -1,4 +1,12 @@
 {
   "jrrp.command_description": "Check today's luck",
-  "jrrp.response": "**Daily Luck**\nUser: {name}\nDate: {date}\nLuck: **{score}** ({level})\nID: `{identifier}`"
+  "jrrp.param.user": "User to check (defaults to yourself)",
+  "jrrp.response": "**Daily Luck**\nUser: {name}\nDate: {date}\nLuck: **{score}** ({level})\nID: `{identifier}`",
+  "jrrp.level.terrible": "Terrible",
+  "jrrp.level.poor": "Poor",
+  "jrrp.level.average": "Average",
+  "jrrp.level.fair": "Fair",
+  "jrrp.level.good": "Good",
+  "jrrp.level.excellent": "Excellent",
+  "jrrp.level.max": "Jackpot"
 }

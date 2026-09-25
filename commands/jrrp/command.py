@@ -2,6 +2,7 @@
 
 Uses the platform-agnostic BotContext / UserInfo abstractions.
 Does not depend on any specific chat platform.
+Response text is localized via utils.i18n.t (same pattern as VersionCommand).
 """
 
 from __future__ import annotations
@@ -14,7 +15,26 @@ try:
 except ImportError:  # allow direct PYTHONPATH=. usage / unit tests
     from context import BotContext, UserInfo  # type: ignore
 
-from .service import calculate_daily_luck, generate_identifier, luck_level
+from utils.i18n import t
+
+from .service import calculate_daily_luck, generate_identifier
+
+
+def _level_i18n_key(score: int) -> str:
+    """Map score to a stable i18n key (UI only; algorithm returns int)."""
+    if score >= 100:
+        return "jrrp.level.max"
+    if score >= 90:
+        return "jrrp.level.excellent"
+    if score >= 70:
+        return "jrrp.level.good"
+    if score >= 50:
+        return "jrrp.level.fair"
+    if score >= 30:
+        return "jrrp.level.average"
+    if score >= 10:
+        return "jrrp.level.poor"
+    return "jrrp.level.terrible"
 
 
 class JrrpCommand:
@@ -46,26 +66,16 @@ class JrrpCommand:
 
         score = calculate_daily_luck(user.id, query_date)
         identifier = generate_identifier(user.id)
-        level = luck_level(score)
+        level = t(_level_i18n_key(score), locale=ctx.locale)
 
-        # Prefer Chinese presentation; fall back to a neutral English form
-        # when the locale is clearly English.
-        locale = (ctx.locale or "").lower()
-        if locale.startswith("en"):
-            message = (
-                f"**Daily Luck**\n"
-                f"User: {user.name}\n"
-                f"Date: {query_date.isoformat()}\n"
-                f"Luck: **{score}** ({level})\n"
-                f"ID: `{identifier}`"
-            )
-        else:
-            message = (
-                f"**今日人品**\n"
-                f"用户：{user.name}\n"
-                f"日期：{query_date.isoformat()}\n"
-                f"人品：**{score}**（{level}）\n"
-                f"识别码：`{identifier}`"
-            )
+        message = t(
+            "jrrp.response",
+            locale=ctx.locale,
+            name=user.name,
+            date=query_date.isoformat(),
+            score=score,
+            level=level,
+            identifier=identifier,
+        )
 
         await ctx.reply(message)
