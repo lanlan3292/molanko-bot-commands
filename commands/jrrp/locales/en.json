@@ -1,0 +1,4 @@
+{
+  "jrrp.command_description": "Check today's luck",
+  "jrrp.response": "**Daily Luck**\nUser: {name}\nDate: {date}\nLuck: **{score}** ({level})\nID: `{identifier}`"
+}

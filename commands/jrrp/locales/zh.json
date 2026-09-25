@@ -1,0 +1,4 @@
+{
+  "jrrp.command_description": "查询今日人品",
+  "jrrp.response": "**今日人品**\n用户：{name}\n日期：{date}\n人品：**{score}**（{level}）\n识别码：`{identifier}`"
+}
