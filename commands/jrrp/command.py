@@ -68,10 +68,14 @@ class JrrpCommand:
         identifier = generate_identifier(user.id)
         level = t(_level_i18n_key(score), locale=ctx.locale)
 
+        response_key = "jrrp.response.target" if target is not None else "jrrp.response"
+
         message = t(
-            "jrrp.response",
+            response_key,
             locale=ctx.locale,
-            name=user.name,
+            id=user.id,
+            username=user.username or user.id,
+            name=user.display_name,
             date=query_date.isoformat(),
             score=score,
             level=level,

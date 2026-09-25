@@ -6,6 +6,15 @@ from dataclasses import dataclass
 class UserInfo:
     id: str
     name: str
+    username: str | None = None
+    display_name: str | None = None
+
+    def __post_init__(self):
+        if self.username is None:
+            self.username = self.id
+
+        if self.display_name is None:
+            self.display_name = self.name
 
 
 class BotContext(ABC):
