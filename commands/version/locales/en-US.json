@@ -1,0 +1,4 @@
+{
+  "version.command_description": "Show the bot version",
+  "version.response": "Current version: **{version}**"
+}
